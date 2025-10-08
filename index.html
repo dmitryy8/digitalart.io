@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🎨 Digital Art — Анастасия Глухих</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
+  <meta name="description" content="Анастасия Глухих — художник и педагог. Портфолио: digital art и живопись на холсте. Заказ и контакты.">
+  <style>
+    /* ============ Reset & Base ============ */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Raleway",sans-serif;
+      background:linear-gradient(135deg,#f8f4ff,#fff9f9);
+      color:#333;line-height:1.5;overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit}
+    img{display:block;max-width:100%;height:auto}
+
+    /* ============ Header ============ */
+    /* Убедись, что artfon.jpg лежит рядом с файлом */
+    header{
+      position:relative;
+      padding:64px 20px 48px;
+      text-align:center;
+      overflow:hidden;
+      background:
+        linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.02)),
+        url('artfon.jpg') center/cover no-repeat;
+      background-blend-mode:overlay;
+    }
+
+    /* <-- здесь изменён цвет на чёрный --> */
+    header h1{
+      font-family:"Playfair Display",serif;
+      font-size:2.2rem;
+      color:#411340; /* чёрный цвет */
+      margin-bottom:8px;
+      line-height:1.05;
+      transition:transform .5s;
+      text-shadow: none; /* убираем тень, чтобы текст был чисто чёрный */
+    }
+    header p{
+      color:#411340; /* чёрный */
+      font-size:1rem;
+      margin-bottom:0;
+      text-shadow: none;
+      opacity:0.95;
+    }
+
+    /* ============ Nav ============ */
+    nav{display:flex;gap:12px;justify-content:center;padding:18px 10px}
+    /* <-- более насыщенный фиолетовый цвет --> */
+    :root{
+      --accent-purple: #6a2fb5; /* основной фиолетовый */
+      --accent-purple-strong: #5b267b; /* дополнительный оттенок */
+    }
+    nav a{
+      text-decoration:none;
+      color:var(--accent-purple);
+      padding:8px 12px;
+      border-radius:10px;
+      transition:transform .18s ease,background .18s,color .18s;
+      font-weight:600;
+      font-size:0.95rem;
+      background:transparent;
+      box-shadow: none;
+    }
+    nav a:hover{
+      transform:translateY(-3px);
+      background:rgba(106,47,181,0.08);
+      color:var(--accent-purple-strong);
+    }
+
+    /* ============ Floating bubbles ============ */
+    @keyframes float {0%{transform:translate(0,0)}50%{transform:translate(20px,-36px)}100%{transform:translate(0,0)}}
+    .bubble{
+      position:absolute;border-radius:50%;background:linear-gradient(180deg,#e5d1ff,#f6e6ff);
+      opacity:.7;filter:blur(.1px);
+      animation:float 10s infinite ease-in-out;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+    .b1{width:18px;height:18px;top:18px;left:28px;animation-delay:0s}
+    .b2{width:22px;height:22px;top:62px;right:40px;animation-delay:2s}
+    .b3{width:20px;height:20px;bottom:30px;left:60px;animation-delay:4s}
+    .b4{width:26px;height:26px;top:50%;left:-28px;animation-delay:1s}
+    .b5{width:28px;height:28px;top:40%;right:-18px;animation-delay:3s}
+    .b6{width:14px;height:14px;bottom:10%;right:10px;animation-delay:5s}
+    .b7{width:12px;height:12px;top:10%;left:60%;animation-delay:.7s}
+    .b8{width:16px;height:16px;top:22%;right:20%;animation-delay:1.6s}
+
+    /* ============ Sections ============ */
+    .container{
+      max-width:1100px;margin:32px auto;padding:0 18px;
+    }
+    section.card{
+      background:#fff;border-radius:16px;padding:26px;box-shadow:0 8px 28px rgba(22,12,44,0.06);
+      margin-bottom:28px;opacity:0;transform:translateY(18px);transition:all .7s ease-out;
+    }
+    section.card.visible{opacity:1;transform:none}
+    h2{font-family:"Playfair Display",serif;color:var(--accent-purple-strong);font-size:1.4rem;margin-bottom:14px}
+
+    /* lists */
+    ul,ol{padding-left:0;list-style:none}
+    li{padding-left:28px;position:relative;margin:8px 0}
+    li::before{content:"✨";position:absolute;left:0;top:0}
+
+    /* ============ About block ============ */
+    .about{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+    .about-photo{width:140px;height:140px;border-radius:50%;overflow:hidden;flex:0 0 140px;box-shadow:0 10px 18px rgba(91,38,123,0.12)}
+    .about-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .about-text{flex:1;min-width:210px}
+    .about-text h3{font-family:"Playfair Display",serif;color:var(--accent-purple-strong);font-size:1.15rem;margin-bottom:6px}
+    .about-text p{color:#4e4e4e;font-size:0.98rem;line-height:1.45}
+
+    /* ============ Portfolio grid (миниатюры) ============ */
+    .portfolio-grid{display:grid;gap:10px;grid-template-columns:repeat(4,1fr);margin-top:12px}
+    .portfolio-item{background:#faf5ff;border-radius:10px;padding:10px;text-align:center;transition:transform .22s,box-shadow .22s;box-shadow:0 6px 14px rgba(22,12,44,0.05);cursor:pointer}
+    .portfolio-item:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(22,12,44,0.09)}
+    .portfolio-thumb{width:100%;height:110px;border-radius:8px;object-fit:cover;display:block;margin:0 auto;background:linear-gradient(180deg,#efe6ff,#fff)}
+    .portfolio-caption{margin-top:8px;font-size:0.9rem;color:var(--accent-purple)}
+    .portfolio-note{margin-top:12px;text-align:center;color:#666;font-size:0.95rem}
+
+    /* кнопки под контактом */
+    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .btn{display:inline-block;background:var(--accent-purple);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;transition:transform .16s ease,background .16s;font-weight:600;font-size:0.95rem}
+    .btn:hover{transform:translateY(-3px);background:#5b267b}
+
+    /* ============ Modal (preview) ============ */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.62);visibility:hidden;opacity:0;transition:opacity .2s,visibility .2s;z-index:1200}
+    .modal.open{visibility:visible;opacity:1}
+    .modal img{max-width:92%;max-height:86%;border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,0.5)}
+
+    /* ============ Footer ============ */
+    footer{padding:18px 10px;text-align:center;color:var(--accent-purple-strong);font-size:0.95rem}
+
+    /* ============ Responsive ============ */
+    @media (max-width:1000px){ .portfolio-grid{grid-template-columns:repeat(3,1fr)} }
+    @media (max-width:700px){
+      header{padding:40px 16px}
+      .portfolio-grid{grid-template-columns:repeat(2,1fr)}
+      .about-photo{width:120px;height:120px;flex:0 0 120px}
+      header h1{font-size:1.6rem}
+      nav a{color:var(--accent-purple)}
+    }
+    @media (max-width:420px){
+      .portfolio-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+      .portfolio-thumb{height:96px}
+      .about{justify-content:center;text-align:center}
+      .about-text{min-width:unset}
+    }
+
+    /* small accessibility focus */
+    .portfolio-item:focus-within{outline:3px solid rgba(161,90,219,0.15);border-radius:10px}
+  </style>
+</head>
+<body>
+  <header>
+    <!-- дополнительные анимированные "пузырьки" -->
+    <div class="bubble b1" aria-hidden="true"></div>
+    <div class="bubble b2" aria-hidden="true"></div>
+    <div class="bubble b3" aria-hidden="true"></div>
+    <div class="bubble b4" aria-hidden="true"></div>
+    <div class="bubble b5" aria-hidden="true"></div>
+    <div class="bubble b6" aria-hidden="true"></div>
+    <div class="bubble b7" aria-hidden="true"></div>
+    <div class="bubble b8" aria-hidden="true"></div>
+
+    <h1>🎨 Digital Art & Живопись на Холсте</h1>
+    <p>Создаю авторские картины и digital-арт — с душой, светом и характером</p>
+  </header>
+
+  <nav>
+    <a href="#directions">Обо мне</a>
+    <a href="#order">Заказ</a>
+    <a href="#portfolio">Портфолио</a>
+  </nav>
+
+  <main class="container" id="main">
+    <!-- ========== ОБО МНЕ / ДИРЕКЦИИ ========== -->
+    <section id="directions" class="card">
+      <div class="about" aria-label="Обо мне">
+        <div class="about-photo" aria-hidden="false">
+          <img src="photo_client.jpg" alt="Фото - Анастасия Глухих" loading="lazy">
+        </div>
+        <div class="about-text">
+          <h3>🎨 Анастасия Глухих</h3>
+          <p><strong>Художник и педагог с опытом более 20 лет</strong></p>
+          <p>Мои картины — это соединение чувства, цвета и истории.
+          Каждая работа рождается из наблюдения за миром, из тишины,
+          где кисть становится продолжением эмоций.</p>
+        </div>
+      </div>
+
+      <h2 style="margin-top:20px">✨ Работаю в двух направлениях</h2>
+      <ul>
+        <li><b>Digital art</b> — современные арт-портреты и рисунки по фото, создаются онлайн.</li>
+        <li><b>Живопись на холсте</b> — ручная работа акрилом или маслом, для интерьера и подарка.</li>
+      </ul>
+    </section>
+
+    <!-- ========== ЗАКАЗ ========== -->
+    <section id="order" class="card">
+      <h2>🖌️ Что можно заказать</h2>
+      <ul>
+        <li>Портреты (реалистичные, стилизованные, digital)</li>
+        <li>Авторские картины для интерьера</li>
+        <li>Арт-иллюстрации и композиции</li>
+        <li>Работы в подарок или по персональной идее</li>
+      </ul>
+
+      <h2 style="margin-top:16px">💬 Как проходит процесс</h2>
+      <ol>
+        <li>Вы рассказываете идею или отправляете фото.</li>
+        <li>Мы обсуждаем стиль, формат и технику — digital или холст.</li>
+        <li>Я делаю эскиз, согласовываю детали.</li>
+        <li>После предоплаты создаю готовую работу.</li>
+        <li>Отправка — онлайн-файл (для digital art) или доставка картины 🎁</li>
+      </ol>
+    </section>
+
+    <!-- ========== ПОРТФОЛИО ========== -->
+    <section id="portfolio" class="card" aria-labelledby="portfolio-title">
+      <h2 id="portfolio-title">✨ Портфолио</h2>
+
+      <div class="portfolio-grid" role="list">
+        <div class="portfolio-item" role="listitem" tabindex="0" aria-label="Открыть работу 1">
+          <img class="portfolio-thumb" src="photo1.jpg" alt="Работа 1 — миниатюра" loading="lazy" data-full="photo1_large.jpg">
+          <div class="portfolio-caption">Работа 1</div>
+        </div>
+
+        <div class="portfolio-item" role="listitem" tabindex="0" aria-label="Открыть работу 2">
+          <img class="portfolio-thumb" src="photo2.jpg" alt="Работа 2 — миниатюра" loading="lazy" data-full="photo2_large.jpg">
+          <div class="portfolio-caption">Работа 2</div>
+        </div>
+
+        <div class="portfolio-item" role="listitem" tabindex="0" aria-label="Открыть работу 3">
+          <img class="portfolio-thumb" src="photo3.jpg" alt="Работа 3 — миниатюра" loading="lazy" data-full="photo3_large.jpg">
+          <div class="portfolio-caption">Работа 3</div>
+        </div>
+
+        <div class="portfolio-item" role="listitem" tabindex="0" aria-label="Открыть работу 4">
+          <img class="portfolio-thumb" src="photo4.jpg" alt="Работа 4 — миниатюра" loading="lazy" data-full="photo4_large.jpg">
+          <div class="portfolio-caption">Работа 4</div>
+        </div>
+
+        <div class="portfolio-item" role="listitem" tabindex="0" aria-label="Открыть работу 5">
+          <img class="portfolio-thumb" src="photo5.jpg" alt="Работа 5 — миниатюра" loading="lazy" data-full="photo5_large.jpg">
+          <div class="portfolio-caption">Работа 5</div>
+        </div>
+
+        <div class="portfolio-item" role="listitem" tabindex="0" aria-label="Открыть работу 6">
+          <img class="portfolio-thumb" src="photo6.jpg" alt="Работа 6 — миниатюра" loading="lazy" data-full="photo6_large.jpg">
+          <div class="portfolio-caption">Работа 6</div>
+        </div>
+
+        <div class="portfolio-item" role="listitem" tabindex="0" aria-label="Открыть работу 7">
+          <img class="portfolio-thumb" src="photo7.jpg" alt="Работа 7 — миниатюра" loading="lazy" data-full="photo7_large.jpg">
+          <div class="portfolio-caption">Работа 7</div>
+        </div>
+
+        <div class="portfolio-item" role="listitem" tabindex="0" aria-label="Открыть работу 8">
+          <img class="portfolio-thumb" src="photo8.jpg" alt="Работа 8 — миниатюра" loading="lazy" data-full="photo8_large.jpg">
+          <div class="portfolio-caption">Работа 8</div>
+        </div>
+      </div>
+
+      <div class="portfolio-note">
+        Также вы можете просмотреть мои работы в
+        <a href="https://instagram.com/anastassiya_art" target="_blank" rel="noopener" style="color:var(--accent-purple);font-weight:700;text-decoration:none">@anastassiya_art</a>
+      </div>
+    </section>
+
+    <!-- ========== КОНТАКТЫ ========== -->
+    <section id="contacts" class="card">
+      <h2>💌 Как оформить заказ</h2>
+      <p>📩 Напишите мне в Direct или WhatsApp.</p>
+      <p>💳 После согласования — предоплата 50%.</p>
+      <p>📦 Доставка по Казахстану и за рубеж, а также онлайн-отправка digital-работ в высоком качестве.</p>
+      <p>🎁 Возможна рамка и подарочная упаковка для физических картин.</p>
+
+      <div class="buttons" role="group" aria-label="Контактные кнопки">
+        <!-- Замените номер на ваш в международном формате без плюса, например: 77012345678 -->
+        <a id="whatsappBtn" class="btn" href="https://wa.me/77012345678" target="_blank" rel="noopener">Написать в WhatsApp</a>
+        <a class="btn" href="https://instagram.com/anastassiya_art" target="_blank" rel="noopener">Перейти в Instagram</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Digital Art by Анастасия Глухих — все права защищены
+  </footer>
+
+  <!-- ========== Modal preview ========== -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <img id="modalImg" alt="Превью работы">
+  </div>
+
+  <script>
+    // Появление секций при скролле
+    (function() {
+      const sections = document.querySelectorAll('section.card');
+      const showOnScroll = () => {
+        const trigger = window.innerHeight * 0.85;
+        sections.forEach(s => {
+          const top = s.getBoundingClientRect().top;
+          if (top < trigger) s.classList.add('visible');
+        });
+      };
+      window.addEventListener('scroll', showOnScroll, {passive:true});
+      window.addEventListener('resize', showOnScroll);
+      showOnScroll();
+    })();
+
+    // Лайтбокс/модал для миниатюр
+    (function() {
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modalImg');
+      const items = document.querySelectorAll('.portfolio-item');
+
+      const open = (imgSrc, alt) => {
+        modalImg.src = imgSrc;
+        modalImg.alt = alt || 'Превью работы';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const close = () => {
+        modal.classList.remove('open');
+        modalImg.src = '';
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+      };
+
+      items.forEach(it => {
+        const img = it.querySelector('img');
+        it.addEventListener('click', () => {
+          const full = img.dataset.full || img.src;
+          open(full, img.alt);
+        });
+        it.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const full = img.dataset.full || img.src;
+            open(full, img.alt);
+          }
+        });
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target === modalImg) close();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) close();
+      });
+    })();
+  </script>
+</body>
+</html>
